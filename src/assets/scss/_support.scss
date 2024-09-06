@@ -1,0 +1,37 @@
+.support {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 60px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 5%;
+
+    &::after {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 394px;
+      height: 250px;
+      background-image: url('../images/1x/hero-bg@1x.png'), url('../images/1x/support-1@1x.png');
+      background-blend-mode: color-burn;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-merriweather);
+    font-size: 36px;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    &_red {
+      font-weight: 700;
+      color: var(--c-red);
+    }
+  }
+}

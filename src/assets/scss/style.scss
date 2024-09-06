@@ -3,11 +3,13 @@
 @import './btn';
 @import './header';
 @import './hero';
+@import './support';
 
 :root {
   --font-golos: 'Golos Text', Arial, Helvetica, Verdana, Roboto, Open Sans, sans-serif;
   --font-merriweather: 'Merriweather', Georgia, 'Times New Roman', Palatino, serif;
 
+  scroll-behavior: smooth;
   font-family: var(--font-golos);
   line-height: 1.5;
   font-weight: 400;
@@ -94,6 +96,7 @@ h4 {
 
   --images: image-set(var(--bg-png-1x) 1x, var(--bg-png-2x) 2x);
 
+  margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   gap: 33px;
@@ -121,6 +124,10 @@ h4 {
     background-position: center center;
     transform-origin: center;
     animation: rotate 30s infinite linear;
+
+    @supports (background-image: url("image.webp")) {
+      --sun: image-set(var(--sun-webp-1x) 1x, var(--sun-webp-2x) 2x);
+    }
   }
 
   &::before {
@@ -136,7 +143,6 @@ h4 {
     left: 0;
     width: 100%;
     height: calc(100vh - var(--marquee-height));
-    // inset: 0;
     z-index: 1;
     background-image:
       var(--knight),
@@ -151,15 +157,16 @@ h4 {
       calc(69.5% + ((var(--mouse-x) - 50%) * .1)) 100%,
       calc(79.36% + ((var(--mouse-x) - 50%) * -.05)) calc(38% + ((var(--mouse-y) - 50%) * -.1)),
       calc(57.15% + ((var(--mouse-x) - 50%) * -.03)) calc(62.1% + ((var(--mouse-y) - 50%) * -.05));
+
+    @supports (background-image: url("image.webp")) {
+      --king: image-set(var(--king-webp-1x) 1x, var(--king-webp-2x) 2x);
+      --queen: image-set(var(--queen-webp-1x) 1x, var(--queen-webp-2x) 2x);
+      --city: image-set(var(--city-webp-1x) 1x, var(--city-webp-2x) 2x);
+      --knight: image-set(var(--knight-webp-1x) 1x, var(--knight-webp-2x) 2x);
+      --pawn: image-set(var(--pawn-webp-1x) 1x, var(--pawn-webp-2x) 2x);
+    }
   }
 
-  @supports (background-image: url("image.webp")) {
-    --king: image-set(var(--king-webp-1x) 1x, var(--king-webp-2x) 2x);
-    --queen: image-set(var(--queen-webp-1x) 1x, var(--queen-webp-2x) 2x);
-    --city: image-set(var(--city-webp-1x) 1x, var(--city-webp-2x) 2x);
-    --knight: image-set(var(--knight-webp-1x) 1x, var(--knight-webp-2x) 2x);
-    --pawn: image-set(var(--pawn-webp-1x) 1x, var(--pawn-webp-2x) 2x);
-  }
 }
 
 .marquee {
@@ -220,6 +227,11 @@ h4 {
   }
 
 }
+
+.section {
+  margin-bottom: 200px;
+}
+
 
 @media screen and (max-width: 576px) {
   .viewport {

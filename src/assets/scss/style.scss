@@ -28,6 +28,7 @@
   // mouse
   --mouse-x: 50%;
   --mouse-y: 50%;
+  --marquee-height: 60px;
 }
 
 body {
@@ -134,7 +135,7 @@ h4 {
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--marquee-height));
     // inset: 0;
     z-index: 1;
     background-image:
@@ -168,7 +169,7 @@ h4 {
   margin-top: auto;
   display: flex;
   gap: var(--gap);
-  height: 60px;
+  height: var(--marquee-height);
   overflow: hidden;
   user-select: none;
   font-family: var(--font-merriweather);
@@ -227,21 +228,33 @@ h4 {
     &::after {
       right: 10%;
       top: auto;
-      bottom: 16%;
+      bottom: 12%;
       width: 316px;
     }
 
     &::before {
-      background-size: 27%, 0 0,
-        255%,
-        0 0, 0 0;
-      background-position: 53% bottom, 0 0,
-        76% bottom,
-        0 0, 0 0;
+      --marquee-height: 38px;
+      background-size:
+        27%,
+        0,
+        240%,
+        17%,
+        17%;
+      background-position:
+        53% bottom,
+        0,
+        78% bottom,
+        74% 75%,
+        19% 84%;
     }
   }
 
   .container {
     padding: 0 20px;
+  }
+
+  .marquee {
+    --marquee-height: 38px;
+    font-size: .8rem;
   }
 }

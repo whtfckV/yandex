@@ -1,4 +1,6 @@
 import './assets/scss/style.scss'
+import './slider';
+import './parts-slider';
 
 const root = document.querySelector(':root')
 

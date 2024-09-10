@@ -1,9 +1,13 @@
 @import './fonts/golos';
 @import './fonts/meriiweather';
+@import './slider';
 @import './btn';
 @import './header';
 @import './hero';
 @import './support';
+@import './parts';
+@import './participants';
+@import './footer';
 
 :root {
   --font-golos: 'Golos Text', Arial, Helvetica, Verdana, Roboto, Open Sans, sans-serif;
@@ -25,12 +29,36 @@
   --c-white: #FFFFFF;
   --c-secondary: #FBCE51;
   --c-red: #F54932;
+  --c-grey: #D0D0D0;
+  --c-blue: #3057A2;
   --c-text: #313131;
 
   // mouse
   --mouse-x: 50%;
   --mouse-y: 50%;
   --marquee-height: 60px;
+
+  // container 
+  --container-offset: 72px;
+
+  --section-gap: 200px;
+
+  @media screen and (max-width: 768px) {
+    --container-offset: 25px;
+  }
+
+  // bg
+  & {
+    --bg-png-1x: url('../images/1x/hero-bg@1x.png');
+    --bg-png-2x: url('../images/2x/hero-bg@2x.png');
+    --bg-webp-1x: url('../images/webp/1x/hero-bg@1x.webp');
+    --bg-webp-2x: url('../images/webp/2x/hero-bg@2x.webp');
+    --bg-main: image-set(var(--bg-png-1x) 1x, var(--bg-png-2x) 2x);
+
+    @supports (background-image: url("image.webp")) {
+      --bg-main: image-set(var(--bg-webp-1x) 1x, var(--bg-webp-2x) 2x)
+    }
+  }
 }
 
 body {
@@ -59,11 +87,6 @@ h4 {
 }
 
 .viewport {
-  --bg-png-1x: url('../images/1x/hero-bg@1x.png');
-  --bg-png-2x: url('../images/2x/hero-bg@2x.png');
-  --bg-webp-1x: url('../images/webp/1x/hero-bg@1x.webp');
-  --bg-webp-2x: url('../images/webp/2x/hero-bg@2x.webp');
-
   --city-png-1x: url('../images/1x/city@1x.png');
   --city-png-2x: url('../images/2x/city@2x.png');
   --city-webp-1x: url('../images/webp/1x/city@1x.webp');
@@ -92,18 +115,20 @@ h4 {
   --sun-png-1x: url('../images/1x/sun@1x.png');
   --sun-png-2x: url('../images/2x/sun@2x.png');
   --sun-webp-1x: url('../images/webp/1x/sun@1x.webp');
-  --sun-webp-2x: url('../images/webp//2x/sun@2x.webp');
+  --sun-webp-2x: url('../images/webp/2x/sun@2x.webp');
 
   --images: image-set(var(--bg-png-1x) 1x, var(--bg-png-2x) 2x);
 
-  margin-bottom: 80px;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 33px;
-  height: 100vh;
+  height: calc(100vh - var(--marquee-height));
+  max-width: 100%;
   background: var(--images), #E9DED4;
   background-blend-mode: color-burn;
   background-repeat: repeat;
+  overflow: hidden;
 
   @supports (background-image: url("image.webp")) {
     --images: image-set(var(--bg-webp-1x) 1x, var(--bg-webp-2x) 2x);
@@ -116,9 +141,10 @@ h4 {
     position: absolute;
     right: 10%;
     top: -64px;
+    border-radius: 100%;
     width: 700px;
     aspect-ratio: 1;
-    background-image: var(--sun);
+    background: var(--sun);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -139,10 +165,7 @@ h4 {
 
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - var(--marquee-height));
+    inset: 0;
     z-index: 1;
     background-image:
       var(--knight),
@@ -219,22 +242,58 @@ h4 {
 .container {
   max-width: 1222px;
   margin: 0 auto;
-  padding: 0 72px;
+  padding: 0 var(--container-offset);
+}
 
-  @media screen and (max-width: 768px) {
-    padding: 0 25px;
+.main {
+  margin-top: 80px;
+  margin-bottom: 140px;
+}
 
+.section:not(:last-child) {
+  margin-bottom: var(--section-gap);
+}
+
+.section-title {
+  margin-bottom: 54px;
+  font-family: var(--font-merriweather);
+  font-size: 54px;
+  line-height: 64px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--c-text);
+
+  &__small {
+    display: inline-block;
+    max-width: 250px;
+    font-family: var(--font-golos);
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: none;
+    color: var(--c-blue);
   }
-
 }
 
-.section {
-  margin-bottom: 200px;
-}
+@media screen and (max-width: 768px) {
+  .section-title {
+    font-size: 36px;
+    line-height: 40px;
 
+    &__small {
+      margin-top: 12px;
+      display: block;
+      max-width: none;
+    }
+  }
+}
 
 @media screen and (max-width: 576px) {
+  :root {
+    --section-gap: 120px;
+  }
+
   .viewport {
+    --marquee-height: 38px;
     gap: 22px;
 
     &::after {
@@ -245,7 +304,6 @@ h4 {
     }
 
     &::before {
-      --marquee-height: 38px;
       background-size:
         27%,
         0,
@@ -264,6 +322,12 @@ h4 {
   .container {
     padding: 0 20px;
   }
+
+  .main {
+    margin-top: 45px;
+    margin-bottom: 100px;
+  }
+
 
   .marquee {
     --marquee-height: 38px;

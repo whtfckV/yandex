@@ -40,6 +40,14 @@
   }
 }
 
+@media screen and (max-width: 992px) {
+  .hero {
+    &__title {
+      font-size: 52px;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .hero {
     &__content {

@@ -1,0 +1,12 @@
+.prev {
+  top: auto;
+  left: 0;
+  bottom: 0;
+  width: 45px;
+  height: 45px;
+  transform: none;
+
+  &::before {
+    content: none;
+  }
+}

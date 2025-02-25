@@ -48,9 +48,6 @@ const MySlider = ({ children }: Props) => {
       <Slider {...settings}>
         {children}
       </Slider>
-      {/* можно было бы сделать компонент и использовать в карточке и здесь т.к. кнопки одинаковые
-        но опять же, я не делал потому что не хочу
-       */}
       <button className='btn'>Смотреть все</button>
     </div>
   );
